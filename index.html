@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dear Love</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+      color: #333;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+
+    .envelope-container {
+      background: #f2e8d5;
+      width: 400px;
+      height: 250px;
+      position: relative;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      transform-origin: bottom;
+      transition: transform 1.5s ease;
+      animation: shakeEnvelope 2s ease-in-out infinite; 
+    }
+
+    .flap {
+      background: #e5c0a4;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      clip-path: polygon(0 0, 100% 0, 50% 60%);
+      transform-origin: top;
+      transform: rotateX(0deg);
+      transition: transform 1.5s ease;
+    }
+
+
+    .open .flap {
+      transform: rotateX(-120deg);
+    }
+
+
+    .letter-container {
+      display: none;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 600px;
+      width: 100%;
+      position: relative;
+      animation: fadeIn 2s ease;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .heart {
+      position: absolute;
+      top: -25px;
+      right: -25px;
+      background: #ff6b81;
+      color: white;
+      font-size: 2rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #d17878;
+      text-align: center;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: slideUp 1s forwards;
+    }
+
+    p:nth-of-type(1) { animation-delay: 0.3s; }
+    p:nth-of-type(2) { animation-delay: 0.6s; }
+    p:nth-of-type(3) { animation-delay: 0.9s; }
+    p:nth-of-type(4) { animation-delay: 1.2s; }
+    p:nth-of-type(5) { animation-delay: 1.5s; }
+
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-style: italic;
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+
+    .button-wrapper {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+
+    .open-btn {
+      font-size: 1.2rem;
+      background: #ff6b81;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem; 
+      border-radius: 25px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      font-weight: bold;
+    }
+
+    .open-btn:hover {
+      transform: scale(1.1);
+    }
+
+
+    @keyframes shakeEnvelope {
+      0%, 100% { transform: rotate(0deg); }
+      20% { transform: rotate(-5deg); }
+      40% { transform: rotate(5deg); }
+      60% { transform: rotate(-5deg); }
+      80% { transform: rotate(5deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+
+    .clicked .envelope-container {
+      animation: none;
+    }
+
+    
+    @keyframes disappearEnvelope {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.5); }
+    }
+
+    
+    .hide-envelope {
+      animation: disappearEnvelope 1s ease-out forwards;
+    }
+
+    @media (max-width: 600px) {
+      .letter-container {
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="envelope-container" id="envelopeContainer">
+    <div class="flap"></div>
+    <div class="button-wrapper">
+      <button class="open-btn" onclick="openEnvelope()">Dear Love</button> 
+    </div>
+  </div>
+
+  <div class="letter-container" id="letterContainer">
+    <div class="heart">❤️</div>
+    <h1>Dear Love,</h1>
+    <p>
+      I know you’re feeling heavy right now. Your thoughts swirl like storms, and it feels like the sky is never clear.
+    </p>
+    <p>
+      But I want you to know—deeply, truly—that I’m here. With you. For you. Every moment, every breath.
+    </p>
+    <p>
+      I don’t see our love as something fragile. I see it as strong, resilient, and full of light—even when it’s hard to feel it.
+    </p>
+    <p>
+      You are the best part of my day, my peace amidst chaos, and my warmth on the coldest nights.
+    </p>
+    <p>
+      Everything is going to be alright. We are alright. And you… you are more than enough.
+    </p>
+    <div class="footer">
+      Forever yours,<br/>
+      Your Nobody ❤️
+    </div>
+  </div>
+
+  <script>
+    function openEnvelope() {
+      
+      document.getElementById('envelopeContainer').classList.add('clicked');
+      
+      
+      document.getElementById('envelopeContainer').classList.add('open');
+      
+      
+      setTimeout(() => {
+        document.getElementById('envelopeContainer').classList.add('hide-envelope');
+      }, 1500); 
+
+      
+      setTimeout(() => {
+        document.getElementById('letterContainer').style.display = 'block';
+        document.getElementById('letterContainer').style.opacity = 1;
+      }, 2500); 
+    }
+  </script>
+</body>
+</html>
